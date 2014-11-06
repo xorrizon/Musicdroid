@@ -23,11 +23,15 @@
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
-buildscript {
-    repositories {
+buildscript
+{
+    repositories
+    {
         mavenCentral()
     }
-    dependencies {
+
+    dependencies
+    {
         classpath 'com.android.tools.build:gradle:0.13.+'
         classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.10.+'
 
@@ -36,30 +40,38 @@ buildscript {
     }
 }
 
-allprojects {
-    repositories {
+allprojects
+{
+    repositories
+    {
         mavenCentral()
     }
 }
 
 task gitSkipWorktreeForIntellijConfigFiles << {
-    try {
+    try
+    {
         'git update-index --skip-worktree .idea/misc.xml'.execute().text.trim()
         'git update-index --skip-worktree Musicdroid.iml'.execute().text.trim()
         'git update-index --skip-worktree musicdroid/musicdroid.iml'.execute().text.trim()
         'git update-index --skip-worktree musicdroidSourceTest/musicdroidSourceTest.iml'.execute().text.trim()
-    } catch (IOException exception) {
+    }
+    catch (IOException exception)
+    {
         throw new UnsupportedOperationException("Could not find git! Maybe it is not in \$PATH variable?")
     }
 }
 
 task gitNoSkipWorktreeForIntellijConfigFiles << {
-    try {
+    try
+    {
         'git update-index --no-skip-worktree .idea/misc.xml'.execute().text.trim()
         'git update-index --no-skip-worktree Musicdroid.iml'.execute().text.trim()
         'git update-index --no-skip-worktree musicdroid/musicdroid.iml'.execute().text.trim()
         'git update-index --no-skip-worktree musicdroidSourceTest/musicdroidSourceTest.iml'.execute().text.trim()
-    } catch (IOException exception) {
+    }
+    catch (IOException exception)
+    {
         throw new UnsupportedOperationException("Could not find git! Maybe it is not in \$PATH variable?")
     }
 }

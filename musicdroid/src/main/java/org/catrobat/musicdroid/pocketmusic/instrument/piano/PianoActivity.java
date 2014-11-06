@@ -35,30 +35,37 @@ import org.catrobat.musicdroid.pocketmusic.note.MusicalInstrument;
 import org.catrobat.musicdroid.pocketmusic.note.MusicalKey;
 import org.catrobat.musicdroid.pocketmusic.note.NoteEvent;
 
-public class PianoActivity extends InstrumentActivity {
+public class PianoActivity extends InstrumentActivity
+{
 
     private PianoViewFragment pianoViewFragment;
     private NoteSheetViewFragment noteSheetViewFragment;
 
-    public PianoActivity() {
+    public PianoActivity()
+    {
         super(MusicalKey.VIOLIN, MusicalInstrument.ACOUSTIC_GRAND_PIANO);
     }
 
-    public PianoViewFragment getPianoViewFragment() {
+    public PianoViewFragment getPianoViewFragment()
+    {
         return pianoViewFragment;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_piano);
         noteSheetViewFragment = new NoteSheetViewFragment();
         pianoViewFragment = new PianoViewFragment();
 
-        if(savedInstanceState != null) {
+        if(savedInstanceState != null)
+        {
             getFragmentManager().beginTransaction().replace(R.id.container, noteSheetViewFragment).commit();
             getFragmentManager().beginTransaction().replace(R.id.container, pianoViewFragment).commit();
-        }else{
+        }
+        else
+        {
             getFragmentManager().beginTransaction().add(R.id.container, noteSheetViewFragment).commit();
             getFragmentManager().beginTransaction().add(R.id.container, pianoViewFragment).commit();
         }
@@ -66,38 +73,46 @@ public class PianoActivity extends InstrumentActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         getMenuInflater().inflate(R.menu.piano, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    protected void doAfterAddNoteEvent(NoteEvent noteEvent) {
+    protected void doAfterAddNoteEvent(NoteEvent noteEvent)
+    {
         noteSheetViewFragment.redraw(getTrack());
     }
 
     @Override
-    protected void doAfterUndoMidi() {
+    protected void doAfterUndoMidi()
+    {
         noteSheetViewFragment.redraw(getTrack());
     }
 
     @Override
-    protected void doAfterDeleteMidi() {
+    protected void doAfterDeleteMidi()
+    {
         noteSheetViewFragment.redraw(getTrack());
     }
 
     @Override
-    protected void doAfterImportMidi() {
+    protected void doAfterImportMidi()
+    {
         noteSheetViewFragment.redraw(getTrack());
     }
 
-    public void scrollNoteSheet() {
-        if (noteSheetViewFragment.checkForScrollAndRecalculateWidth()) {
+    public void scrollNoteSheet()
+    {
+        if (noteSheetViewFragment.checkForScrollAndRecalculateWidth())
+        {
             HorizontalScrollView hv = (HorizontalScrollView) findViewById(R.id.scroll_note_sheet_view);
             hv.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
         }

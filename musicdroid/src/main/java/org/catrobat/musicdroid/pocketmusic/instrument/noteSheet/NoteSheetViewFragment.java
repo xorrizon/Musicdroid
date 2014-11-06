@@ -44,7 +44,8 @@ public  class NoteSheetViewFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         View rootView = inflater.inflate(R.layout.fragment_notesheetview, container, false);
         rootView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getDisplayHeight() / 2));
         noteSheetView = (NoteSheetView) rootView.findViewById(R.id.note_sheet_view);
@@ -52,7 +53,8 @@ public  class NoteSheetViewFragment extends Fragment {
         return rootView;
     }
 
-    private int[] initializeDisplay() {
+    private int[] initializeDisplay()
+    {
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -63,19 +65,23 @@ public  class NoteSheetViewFragment extends Fragment {
         return widthAndHeight;
     }
 
-    public void redraw(Track track) {
+    public void redraw(Track track)
+    {
         noteSheetView.redraw(track);
     }
 
-    public int getDisplayWidth() {
+    public int getDisplayWidth()
+    {
         return initializeDisplay()[X_POS];
     }
 
-    public int getDisplayHeight() {
+    public int getDisplayHeight()
+    {
         return initializeDisplay()[Y_POS];
     }
 
-    public boolean checkForScrollAndRecalculateWidth() {
+    public boolean checkForScrollAndRecalculateWidth()
+    {
         return noteSheetView.checkForScrollAndRecalculateWidth();
     }
 }
