@@ -79,14 +79,17 @@ public class PianoNoteSheetCanvas extends NoteSheetCanvas {
     }
 
     @Override
-    protected void drawSheetElements() {
+    protected void drawSheetElements()
+    {
         drawKey();
         drawTactUnit();
         drawTrack();
     }
 
-	private void drawKey() {
-		if (track.getKey() != MusicalKey.VIOLIN) {
+	private void drawKey()
+    {
+		if (track.getKey() != MusicalKey.VIOLIN)
+        {
             throw new UnsupportedOperationException();
 		}
 

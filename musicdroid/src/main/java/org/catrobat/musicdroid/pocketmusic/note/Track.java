@@ -33,7 +33,8 @@ import java.util.TreeSet;
 /**
  * Created by Andrej on 23.06.2014.
  */
-public class Track implements Serializable {
+public class Track implements Serializable
+{
 
     private static final long serialVersionUID = 7483021689872527955L;
 
@@ -42,20 +43,23 @@ public class Track implements Serializable {
     private MusicalKey key;
     private long lastTick;
 
-    public Track(MusicalKey key, MusicalInstrument instrument) {
+    public Track(MusicalKey key, MusicalInstrument instrument)
+    {
         this.events = new HashMap<Long, List<NoteEvent>>();
         this.instrument = instrument;
         this.key = key;
         this.lastTick = 0;
     }
 
-    public Track(Track track) {
+    public Track(Track track)
+    {
         this.events = new HashMap<Long, List<NoteEvent>>();
         this.instrument = track.getInstrument();
         this.key = track.getKey();
         this.lastTick = track.getLastTick();
 
-        for (long tick : track.getSortedTicks()) {
+        for (long tick : track.getSortedTicks())
+        {
             List<NoteEvent> noteEventList = new LinkedList<NoteEvent>();
             this.events.put(tick, noteEventList);
 

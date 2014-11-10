@@ -30,12 +30,14 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import org.catrobat.musicdroid.pocketmusic.R;
 import org.catrobat.musicdroid.pocketmusic.note.Track;
 import org.catrobat.musicdroid.pocketmusic.note.draw.NoteSheetView;
 
-public  class NoteSheetViewFragment extends Fragment {
+public  class NoteSheetViewFragment extends Fragment
+{
 
     public static int X_POS = 0;
     public static int Y_POS = 1;
@@ -47,9 +49,8 @@ public  class NoteSheetViewFragment extends Fragment {
                              Bundle savedInstanceState)
     {
         View rootView = inflater.inflate(R.layout.fragment_notesheetview, container, false);
-        rootView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getDisplayHeight() / 2));
+        rootView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getDisplayHeight()/2));
         noteSheetView = (NoteSheetView) rootView.findViewById(R.id.note_sheet_view);
-
         return rootView;
     }
 

@@ -186,7 +186,8 @@ public  class PianoViewFragment extends Fragment
                 return (event.getAction() == android.view.MotionEvent.ACTION_DOWN);
             }
 
-            private boolean isUpActionEvent(MotionEvent event) {
+            private boolean isUpActionEvent(MotionEvent event)
+            {
                 return (event.getAction() == android.view.MotionEvent.ACTION_UP);
             }
         });
@@ -196,6 +197,7 @@ public  class PianoViewFragment extends Fragment
     {
         PianoActivity pianoActivity = (PianoActivity) getActivity();
         pianoActivity.addNoteEvent(noteEvent);
+
     }
 
     public Button getBlackButtonAtIndex(int index)

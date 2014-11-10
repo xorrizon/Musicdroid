@@ -31,11 +31,14 @@ import org.catrobat.musicdroid.pocketmusic.note.symbol.TrackToSymbolsConverter;
 
 public class TrackDrawer {
 
-	public void drawTrack(Track track, PianoNoteSheetCanvas noteSheetCanvas, Resources resources) {
+	public void drawTrack(Track track, PianoNoteSheetCanvas noteSheetCanvas, Resources resources)
+    {
 		TrackToSymbolsConverter converter = new TrackToSymbolsConverter();
 		SymbolDrawer symbolDrawer = new SymbolDrawer(noteSheetCanvas, resources, track.getKey());
 
-		for (Symbol symbol : converter.convertTrack(track)) {
+
+		for (Symbol symbol : converter.convertTrack(track))
+        {
 			symbolDrawer.drawSymbol(symbol);
 		}
 	}

@@ -33,12 +33,15 @@ public class SymbolDrawer {
 
 	private NoteDrawer noteDrawer;
 
-	public SymbolDrawer(PianoNoteSheetCanvas noteSheetCanvas, Resources resources, MusicalKey key) {
+	public SymbolDrawer(PianoNoteSheetCanvas noteSheetCanvas, Resources resources, MusicalKey key)
+    {
 		this.noteDrawer = new NoteDrawer(noteSheetCanvas, key, resources);
 	}
 
-	public void drawSymbol(Symbol symbol) {
-		if (symbol instanceof NoteSymbol) {
+	public void drawSymbol(Symbol symbol)
+    {
+		if (symbol instanceof NoteSymbol)
+        {
 			noteDrawer.drawNoteSymbol((NoteSymbol) symbol);
 		}
 	}

@@ -36,7 +36,8 @@ import org.catrobat.musicdroid.pocketmusic.R;
 /**
  * @author musicdroid
  */
-public abstract class NoteSheetCanvas {
+public abstract class NoteSheetCanvas
+{
 
     public static final int NOTE_SHEET_PADDING = 20;
     public static final int NUMBER_OF_LINES_FROM_CENTER_LINE_IN_BOTH_DIRECTIONS = 2;

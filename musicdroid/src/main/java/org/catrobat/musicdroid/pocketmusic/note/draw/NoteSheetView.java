@@ -34,21 +34,25 @@ import org.catrobat.musicdroid.pocketmusic.note.MusicalInstrument;
 import org.catrobat.musicdroid.pocketmusic.note.MusicalKey;
 import org.catrobat.musicdroid.pocketmusic.note.Track;
 
-public class NoteSheetView extends View {
+public class NoteSheetView extends View
+{
 
 	private Track track;
 
 	private PianoNoteSheetCanvas noteSheetCanvas;
     private int widthBeforeResize;
 
-	public NoteSheetView(Context context, AttributeSet attrs) {
+	public NoteSheetView(Context context, AttributeSet attrs)
+    {
 		super(context, attrs);
 		track = new Track(MusicalKey.VIOLIN, MusicalInstrument.ELECTRIC_PIANO_1);
         widthBeforeResize = getWidth();
 	}
 
-    public boolean checkForScrollAndRecalculateWidth() {
-        if (widthBeforeResize != getWidth()) {
+    public boolean checkForScrollAndRecalculateWidth()
+    {
+        if (widthBeforeResize != getWidth())
+        {
             widthBeforeResize = getWidth();
             return true;
         }

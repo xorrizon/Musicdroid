@@ -46,7 +46,8 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 
-public abstract class InstrumentActivity extends Activity {
+public abstract class InstrumentActivity extends Activity
+{
 
     private EditText editTextMidiExportNameDialogPrompt;
 
@@ -55,7 +56,8 @@ public abstract class InstrumentActivity extends Activity {
     private String[] midiFileList;
     private TrackMementoStack mementoStack;
 
-    public InstrumentActivity(MusicalKey key, MusicalInstrument instrument) {
+    public InstrumentActivity(MusicalKey key, MusicalInstrument instrument)
+    {
         editTextMidiExportNameDialogPrompt = null;
 
         tickThread = new SimpleTickProvider();
@@ -65,14 +67,19 @@ public abstract class InstrumentActivity extends Activity {
         mementoStack = new TrackMementoStack();
     }
 
-    public Track getTrack() {
+    public Track getTrack()
+    {
         return track;
     }
 
-    public void addNoteEvent(NoteEvent noteEvent) {
-        if (noteEvent.isNoteOn()) {
+    public void addNoteEvent(NoteEvent noteEvent)
+    {
+        if (noteEvent.isNoteOn())
+        {
             mementoStack.prepareMemento(track);
-        } else {
+        }
+        else
+        {
             mementoStack.pushPreparedMemento();
         }
 
@@ -84,18 +91,27 @@ public abstract class InstrumentActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_settings)
+        {
             return true;
-        } else if (id == R.id.action_export_midi) {
+        }
+        else if (id == R.id.action_export_midi)
+        {
             onActionExportMidi();
             return true;
-        } else if (id == R.id.action_undo_midi) {
+        }
+        else if (id == R.id.action_undo_midi)
+        {
             onActionUndoMidi();
             return true;
-        } else if (id == R.id.action_import_midi) {
+        }
+        else if (id == R.id.action_import_midi)
+        {
             onActionImportMidi();
             return true;
-        } else if (id == R.id.action_delete_midi) {
+        }
+        else if (id == R.id.action_delete_midi)
+        {
             onActionDeleteMidi();
             return true;
         }
@@ -103,21 +119,27 @@ public abstract class InstrumentActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void onActionExportMidi() {
+    private void onActionExportMidi()
+    {
         exportMidiFileByUserInput();
     }
 
-    private void onActionUndoMidi() {
-        if (false == mementoStack.isEmpty()) {
+    private void onActionUndoMidi()
+    {
+        if (false == mementoStack.isEmpty())
+        {
             track = mementoStack.popMementoAsTrack();
             tickThread.setTickBasedOnTrack(track);
             doAfterUndoMidi();
         }
     }
 
-    private void onActionImportMidi() {
-        if (ProjectToMidiConverter.MIDI_FOLDER.exists()) {
-            FilenameFilter filter = new FilenameFilter() {
+    private void onActionImportMidi()
+    {
+        if (ProjectToMidiConverter.MIDI_FOLDER.exists())
+        {
+            FilenameFilter filter =
+                    new FilenameFilter() {
                 public boolean accept(File dir, String filename) {
                     File selectedFile = new File(dir, filename);
                     return filename.contains(ProjectToMidiConverter.MIDI_FILE_EXTENSION) || selectedFile.isDirectory();
@@ -132,7 +154,8 @@ public abstract class InstrumentActivity extends Activity {
         }
     }
 
-    private void onActionDeleteMidi() {
+    private void onActionDeleteMidi()
+    {
         track = new Track(track.getKey(), track.getInstrument());
         tickThread.setTickBasedOnTrack(track);
         doAfterDeleteMidi();
@@ -140,13 +163,16 @@ public abstract class InstrumentActivity extends Activity {
         Toast.makeText(getBaseContext(), R.string.action_delete_midi_success, Toast.LENGTH_LONG).show();
     }
 
-    private void removeMidiExtension() {
-        for (int i = 0; i < midiFileList.length; i++) {
+    private void removeMidiExtension()
+    {
+        for (int i = 0; i < midiFileList.length; i++)
+        {
             midiFileList[i] = midiFileList[i].replaceFirst("[.][^.]+$", "");
         }
     }
 
-    protected void importMidiFileByUserInput() {
+    protected void importMidiFileByUserInput()
+    {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         builder.setTitle(R.string.action_import_midi_file_chooser_title);
@@ -166,10 +192,14 @@ public abstract class InstrumentActivity extends Activity {
 
                     Toast.makeText(getBaseContext(), R.string.action_import_midi_success,
                             Toast.LENGTH_LONG).show();
-                } catch (MidiException e) {
+                }
+                catch (MidiException e)
+                {
                     Toast.makeText(getBaseContext(), R.string.action_import_midi_validation_error,
                             Toast.LENGTH_LONG).show();
-                } catch (IOException e) {
+                }
+                catch (IOException e)
+                {
                     Toast.makeText(getBaseContext(), R.string.action_import_midi_io_error + e.getMessage(),
                             Toast.LENGTH_LONG).show();
                 }
@@ -179,7 +209,8 @@ public abstract class InstrumentActivity extends Activity {
         builder.show();
     }
 
-    private void exportMidiFileByUserInput() {
+    private void exportMidiFileByUserInput()
+    {
         editTextMidiExportNameDialogPrompt = new EditText(this);
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -193,23 +224,29 @@ public abstract class InstrumentActivity extends Activity {
                             public void onClick(DialogInterface dialog, int which) {
                                 String userInput = editTextMidiExportNameDialogPrompt.getText().toString();
 
-                                if ((userInput != null) && (false == userInput.equals(""))) {
+                                if ((userInput != null) && (false == userInput.equals("")))
+                                {
                                     String filename = userInput.split(ProjectToMidiConverter.MIDI_FILE_EXTENSION)[0];
 
                                     final ProjectToMidiConverter converter = new ProjectToMidiConverter();
                                     final Project project = new Project(Project.DEFAULT_BEATS_PER_MINUTE);
                                     project.addTrack(getTrack());
 
-                                    try {
+                                    try
+                                    {
                                         converter.writeProjectAsMidi(project, filename);
 
                                         Toast.makeText(getBaseContext(), R.string.action_export_midi_success,
                                                 Toast.LENGTH_LONG).show();
-                                    } catch (Exception e) {
+                                    }
+                                    catch (Exception e)
+                                    {
                                         Toast.makeText(getBaseContext(), R.string.action_export_midi_error,
                                                 Toast.LENGTH_LONG).show();
                                     }
-                                } else {
+                                }
+                                else
+                                {
                                     Toast.makeText(getBaseContext(), R.string.action_export_midi_cancel,
                                             Toast.LENGTH_LONG).show();
                                 }
@@ -228,7 +265,8 @@ public abstract class InstrumentActivity extends Activity {
         alertDialog.show();
     }
 
-    public EditText getEditTextMidiExportNameDialogPrompt() {
+    public EditText getEditTextMidiExportNameDialogPrompt()
+    {
         return editTextMidiExportNameDialogPrompt;
     }
 

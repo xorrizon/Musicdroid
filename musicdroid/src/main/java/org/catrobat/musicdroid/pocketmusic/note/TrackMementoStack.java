@@ -25,17 +25,21 @@ package org.catrobat.musicdroid.pocketmusic.note;
 
 import java.util.Stack;
 
-public class TrackMementoStack {
+public class TrackMementoStack
+{
 
-    private class TrackMemento {
+    private class TrackMemento
+    {
 
         private Track track;
 
-        public TrackMemento(Track track) {
+        public TrackMemento(Track track)
+        {
             this.track = new Track(track);
         }
 
-        public Track getTrack() {
+        public Track getTrack()
+        {
             return track;
         }
     }
